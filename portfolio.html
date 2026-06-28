@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Python & Data Science Tutor | Teaching Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --py-yellow: #FFD43B;
+    --py-blue: #4B8BBE;
+    --py-dark: #306998;
+    --accent-green: #3CB371;
+    --accent-coral: #FF6B6B;
+    --accent-purple: #845EF7;
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --radius: 14px;
+    --font: 'Plus Jakarta Sans', sans-serif;
+    --mono: 'Fira Code', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 18px; font-weight: 500;
+    color: var(--py-dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo .bracket { color: var(--py-yellow); font-size: 22px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--py-dark); }
+  .nav-cta {
+    background: var(--py-yellow);
+    color: var(--text);
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 0 #c9a800;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 0 #c9a800; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 24px 72px;
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #EFF6FF; color: var(--py-dark);
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 13px; font-weight: 600;
+    margin-bottom: 20px;
+    border: 1px solid #BFDBFE;
+  }
+  .hero-eyebrow .dot { width: 7px; height: 7px; background: var(--accent-green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .hero h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800; line-height: 1.18;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--py-blue), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p { color: var(--muted); font-size: 17px; margin-bottom: 32px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--py-dark);
+    color: #fff; padding: 12px 28px;
+    border-radius: 10px; font-size: 15px; font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #1e4d76; transform: translateY(-1px); }
+  .btn-outline {
+    border: 2px solid var(--py-blue); color: var(--py-blue);
+    padding: 12px 28px; border-radius: 10px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: #EFF6FF; transform: translateY(-1px); }
+
+  /* ── CODE CARD ── */
+  .hero-code {
+    background: #1e1e2e;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    border: 1px solid #2d2d44;
+  }
+  .code-bar {
+    background: #2d2d44; padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dot-r { width:11px;height:11px;border-radius:50%;background:#FF6B6B; }
+  .dot-y { width:11px;height:11px;border-radius:50%;background:#FFD43B; }
+  .dot-g { width:11px;height:11px;border-radius:50%;background:#3CB371; }
+  .code-filename { color: #6e6e9a; font-family: var(--mono); font-size: 12px; margin-left: 8px; }
+  .code-body { padding: 20px 22px; font-family: var(--mono); font-size: 13.5px; line-height: 1.9; }
+  .c-kw  { color: #C792EA; }
+  .c-fn  { color: #82AAFF; }
+  .c-str { color: #C3E88D; }
+  .c-cm  { color: #546E7A; }
+  .c-num { color: #F78C6C; }
+  .c-op  { color: #89DDFF; }
+  .c-out { color: #FFD43B; }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--py-dark);
+    padding: 32px 24px;
+  }
+  .stats-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; text-align: center;
+  }
+  .stat-num { font-size: 34px; font-weight: 800; color: var(--py-yellow); }
+  .stat-lbl { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 24px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    color: var(--py-blue); text-transform: uppercase; letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(24px, 3vw, 36px); font-weight: 800;
+    color: var(--text); margin-bottom: 14px;
+  }
+  .section-sub { color: var(--muted); font-size: 16px; max-width: 560px; }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 56px; align-items: center; margin-top: 48px;
+  }
+  .about-avatar-wrap {
+    position: relative; display: flex; justify-content: center;
+  }
+  .about-avatar {
+    width: 220px; height: 220px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--py-yellow), var(--py-blue));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 80px;
+    box-shadow: 0 0 0 8px #fff, 0 0 0 10px var(--py-yellow);
+  }
+  .about-badge {
+    position: absolute; bottom: 10px; right: 60px;
+    background: var(--surface); border: 2px solid var(--border);
+    border-radius: 12px; padding: 8px 14px;
+    font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .about-text p { color: var(--muted); margin-bottom: 16px; }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .tag {
+    background: #F3F4F6; color: var(--text);
+    padding: 5px 12px; border-radius: 20px;
+    font-size: 13px; font-weight: 500;
+  }
+  .tag.blue { background: #EFF6FF; color: var(--py-dark); }
+  .tag.green { background: #F0FDF4; color: #166534; }
+  .tag.purple { background: #F5F3FF; color: #5B21B6; }
+
+  /* ── SKILLS ── */
+  .skills-bg { background: #F8FAFF; }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px; margin-top: 48px;
+  }
+  .skill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.09); transform: translateY(-2px); }
+  .skill-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 14px;
+  }
+  .skill-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .skill-card p { font-size: 13px; color: var(--muted); }
+  .skill-bar-wrap { margin-top: 12px; background: #F3F4F6; border-radius: 4px; height: 5px; overflow: hidden; }
+  .skill-bar { height: 100%; border-radius: 4px; }
+
+  /* ── SAMPLE LESSON ── */
+  .lessons-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px; margin-top: 48px;
+  }
+  .lesson-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .lesson-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .lesson-thumb {
+    height: 140px; display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+  }
+  .lesson-body { padding: 20px; }
+  .lesson-level {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .level-beginner { background: #F0FDF4; color: #166534; }
+  .level-intermediate { background: #FFF7ED; color: #9A3412; }
+  .level-advanced { background: #F5F3FF; color: #5B21B6; }
+  .lesson-body h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .lesson-body p { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .lesson-meta { display: flex; gap: 16px; font-size: 12px; color: var(--muted); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-bg { background: #FFFBF0; }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px; margin-top: 48px;
+  }
+  .testi-card {
+    background: var(--surface); border: 1px solid #F3DEBB;
+    border-radius: var(--radius); padding: 28px;
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+  .testi-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .quote-mark {
+    font-size: 64px; line-height: 1; color: var(--py-yellow);
+    position: absolute; top: 12px; left: 22px;
+    font-family: Georgia, serif; font-weight: 700;
+  }
+  .testi-card p {
+    font-size: 14px; color: var(--text); line-height: 1.7;
+    margin-top: 28px; margin-bottom: 20px;
+  }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .testi-name { font-size: 14px; font-weight: 700; }
+  .testi-role { font-size: 12px; color: var(--muted); }
+  .stars { color: var(--py-yellow); font-size: 13px; margin-bottom: 8px; }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px; margin-top: 48px; align-items: start;
+  }
+  .price-card {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 18px; padding: 32px 28px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .price-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .price-card.popular {
+    border-color: var(--py-blue);
+    box-shadow: 0 0 0 3px rgba(75,139,190,0.15);
+  }
+  .popular-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--py-yellow); color: var(--text);
+    padding: 4px 16px; border-radius: 20px;
+    font-size: 12px; font-weight: 700;
+    white-space: nowrap;
+  }
+  .price-tier { font-size: 13px; font-weight: 700; color: var(--py-blue); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .price-amount { font-size: 40px; font-weight: 800; color: var(--text); line-height: 1; }
+  .price-amount span { font-size: 16px; font-weight: 500; color: var(--muted); }
+  .price-desc { font-size: 13px; color: var(--muted); margin: 12px 0 20px; }
+  .price-features { list-style: none; margin-bottom: 28px; }
+  .price-features li {
+    font-size: 14px; padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .price-features li::before { content: "✓"; color: var(--accent-green); font-weight: 700; }
+  .btn-price {
+    width: 100%; padding: 12px;
+    background: var(--py-dark); color: #fff;
+    border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    text-align: center; text-decoration: none; display: block;
+  }
+  .btn-price:hover { background: #1e4d76; transform: translateY(-1px); }
+  .btn-price.outline {
+    background: transparent; color: var(--py-dark);
+    border: 2px solid var(--py-dark);
+  }
+  .btn-price.outline:hover { background: #EFF6FF; }
+
+  /* ── CONTACT ── */
+  .contact-bg { background: #F8FAFF; }
+  .contact-wrap {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 56px; margin-top: 48px; align-items: start;
+  }
+  .contact-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+  .contact-info p { color: var(--muted); margin-bottom: 28px; }
+  .contact-detail {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px; font-size: 14px;
+  }
+  .contact-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: #EFF6FF; display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .contact-form {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px; padding: 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .form-row { margin-bottom: 20px; }
+  .form-row label {
+    display: block; font-size: 13px; font-weight: 600;
+    margin-bottom: 7px; color: var(--text);
+  }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: var(--font); font-size: 14px; color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: var(--py-blue);
+    box-shadow: 0 0 0 3px rgba(75,139,190,0.12);
+  }
+  .form-row textarea { resize: vertical; min-height: 110px; }
+  .form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .btn-submit {
+    width: 100%; padding: 13px;
+    background: var(--py-dark); color: #fff;
+    border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: #1e4d76; transform: translateY(-1px); }
+  .form-success {
+    display: none; text-align: center; padding: 24px;
+    color: var(--accent-green); font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text); color: rgba(255,255,255,0.7);
+    padding: 40px 24px; text-align: center;
+    font-size: 14px;
+  }
+  footer .footer-logo {
+    font-family: var(--mono); font-size: 20px;
+    color: var(--py-yellow); margin-bottom: 12px;
+  }
+  footer p { margin-bottom: 8px; }
+  .footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 16px; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--py-yellow); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; }
+    .hero-code { display: none; }
+    .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .form-two { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <span class="bracket">&lt;</span>PyTutor<span class="bracket">/&gt;</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#lessons">Lessons</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a session</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section style="padding: 0; background: var(--surface);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Available for new students
+      </div>
+      <h1>Learn <span class="highlight">Python & Data Science</span> the fun way</h1>
+      <p>Friendly, patient, and results-focused tutoring. Whether you're starting from zero or leveling up your data skills, I'll meet you exactly where you are.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Book a free trial</a>
+        <a href="#lessons" class="btn-outline">See sample lessons</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-code">
+        <div class="code-bar">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+          <span class="code-filename">lesson_01.py</span>
+        </div>
+        <div class="code-body">
+          <span class="c-cm"># Your first data analysis ✨</span><br>
+          <span class="c-kw">import</span> <span class="c-fn">pandas</span> <span class="c-kw">as</span> pd<br>
+          <span class="c-kw">import</span> <span class="c-fn">matplotlib.pyplot</span> <span class="c-kw">as</span> plt<br><br>
+          <span class="c-cm"># Load your dataset</span><br>
+          df <span class="c-op">=</span> pd.<span class="c-fn">read_csv</span>(<span class="c-str">'sales.csv'</span>)<br><br>
+          <span class="c-cm"># Explore the data</span><br>
+          df.<span class="c-fn">head</span>(<span class="c-num">5</span>)<br>
+          df.<span class="c-fn">describe</span>()<br><br>
+          <span class="c-cm"># Visualise in one line 🎉</span><br>
+          df[<span class="c-str">'revenue'</span>].<span class="c-fn">plot</span>(<span class="c-fn">kind</span><span class="c-op">=</span><span class="c-str">'bar'</span>)<br>
+          plt.<span class="c-fn">show</span>()<br><br>
+          <span class="c-out">👆 You just did data science!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">120+</div>
+      <div class="stat-lbl">Students taught</div>
+    </div>
+    <div>
+      <div class="stat-num">4.9★</div>
+      <div class="stat-lbl">Average rating</div>
+    </div>
+    <div>
+      <div class="stat-num">500+</div>
+      <div class="stat-lbl">Hours of tutoring</div>
+    </div>
+    <div>
+      <div class="stat-num">5 yrs</div>
+      <div class="stat-lbl">Teaching experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label"># about_me</div>
+    <h2 class="section-title">Hi, I'm your Python guide 👋</h2>
+    <p class="section-sub">I make data science feel less scary and a lot more fun.</p>
+    <div class="about-grid">
+      <div class="about-avatar-wrap">
+        <div class="about-avatar">🧑‍💻</div>
+        <div class="about-badge">⭐ Top Rated Tutor</div>
+      </div>
+      <div class="about-text">
+        <p>I'm a Python & Data Science tutor with 5+ years of experience helping beginners, career switchers, and CS students become confident coders. My teaching style is practical, patient, and project-based — because the best way to learn is by building real things.</p>
+        <p>I've helped students pass university Python courses, land their first data analyst roles, and build personal projects that got them noticed by employers. No jargon, no judgment — just clear, step-by-step learning tailored to your goals.</p>
+        <p>When I'm not tutoring, I'm building data pipelines, contributing to open-source, or writing beginner Python tutorials.</p>
+        <div class="tag-row">
+          <span class="tag blue">Python</span>
+          <span class="tag blue">Pandas</span>
+          <span class="tag blue">NumPy</span>
+          <span class="tag green">Machine Learning</span>
+          <span class="tag green">Data Viz</span>
+          <span class="tag purple">SQL</span>
+          <span class="tag purple">Jupyter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills" class="skills-bg">
+  <div class="section-inner">
+    <div class="section-label"># skills_and_tools</div>
+    <h2 class="section-title">What I teach</h2>
+    <p class="section-sub">From first "Hello, World!" to advanced machine learning models — I cover the full journey.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon" style="background:#EFF6FF;">🐍</div>
+        <h3>Python fundamentals</h3>
+        <p>Variables, loops, functions, OOP, and clean code habits from day one.</p>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:98%;background:#4B8BBE;"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="background:#F0FDF4;">📊</div>
+        <h3>Data analysis</h3>
+        <p>Pandas, NumPy, and real datasets to uncover insights that matter.</p>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:95%;background:#3CB371;"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="background:#FFFBF0;">📈</div>
+        <h3>Data visualisation</h3>
+        <p>Matplotlib, Seaborn, and Plotly — turning numbers into clear charts.</p>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:92%;background:#FFD43B;"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="background:#F5F3FF;">🤖</div>
+        <h3>Machine learning</h3>
+        <p>Scikit-learn, regression, classification, clustering, and model evaluation.</p>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%;background:#845EF7;"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="background:#FFF1F2;">🗄️</div>
+        <h3>SQL & databases</h3>
+        <p>Querying, joining, and aggregating data for real-world analysis.</p>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%;background:#FF6B6B;"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon" style="background:#F0FDF4;">🎓</div>
+        <h3>Exam & course help</h3>
+        <p>CS50, university Python courses, Kaggle competitions, and coding tests.</p>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:94%;background:#3CB371;"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SAMPLE LESSONS ── -->
+<section id="lessons">
+  <div class="section-inner">
+    <div class="section-label"># sample_lessons</div>
+    <h2 class="section-title">Sample lessons</h2>
+    <p class="section-sub">A glimpse of the topics we can cover together — fully customised to your pace.</p>
+    <div class="lessons-grid">
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:#EFF6FF;">🐍</div>
+        <div class="lesson-body">
+          <span class="lesson-level level-beginner">Beginner</span>
+          <h3>Python basics in 60 minutes</h3>
+          <p>Variables, data types, loops, and your first function — hands-on from minute one.</p>
+          <div class="lesson-meta"><span>⏱ 60 min</span><span>💬 Live coding</span></div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:#F0FDF4;">🐼</div>
+        <div class="lesson-body">
+          <span class="lesson-level level-intermediate">Intermediate</span>
+          <h3>Data wrangling with Pandas</h3>
+          <p>Load, clean, filter, and reshape real datasets using Pandas DataFrames.</p>
+          <div class="lesson-meta"><span>⏱ 90 min</span><span>📁 Real dataset</span></div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:#FFFBF0;">📉</div>
+        <div class="lesson-body">
+          <span class="lesson-level level-intermediate">Intermediate</span>
+          <h3>Your first ML model</h3>
+          <p>Build a linear regression model from scratch, evaluate it, and understand what the numbers mean.</p>
+          <div class="lesson-meta"><span>⏱ 90 min</span><span>🤖 Scikit-learn</span></div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:#F5F3FF;">📊</div>
+        <div class="lesson-body">
+          <span class="lesson-level level-beginner">Beginner</span>
+          <h3>Beautiful charts in Python</h3>
+          <p>Matplotlib & Seaborn crash course — create publication-ready charts in under an hour.</p>
+          <div class="lesson-meta"><span>⏱ 60 min</span><span>🎨 Visualisation</span></div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:#FFF1F2;">🗄️</div>
+        <div class="lesson-body">
+          <span class="lesson-level level-beginner">Beginner</span>
+          <h3>SQL for data analysts</h3>
+          <p>SELECT, JOIN, GROUP BY — the core queries you'll use every single day.</p>
+          <div class="lesson-meta"><span>⏱ 75 min</span><span>🔍 SQL</span></div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:#F0FDF4;">🏆</div>
+        <div class="lesson-body">
+          <span class="lesson-level level-advanced">Advanced</span>
+          <h3>Kaggle competition strategy</h3>
+          <p>Feature engineering, model stacking, and cross-validation to climb the leaderboard.</p>
+          <div class="lesson-meta"><span>⏱ 120 min</span><span>🥇 Kaggle</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials" class="testimonials-bg">
+  <div class="section-inner">
+    <div class="section-label"># student_reviews</div>
+    <h2 class="section-title">What students say</h2>
+    <p class="section-sub">Real words from real learners — no script, no fluff.</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>I went from zero Python knowledge to building my own data dashboard in 6 weeks. The lessons were clear, fun, and always at my pace. Best investment I made this year.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#EFF6FF;">👩</div>
+          <div>
+            <div class="testi-name">Sara M.</div>
+            <div class="testi-role">Marketing analyst, career switcher</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>I was failing my university Python course. After 4 sessions, I passed the final exam with an A. The tutor explains things so clearly — I finally understand why the code works, not just how.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#F5F3FF;">👨‍🎓</div>
+          <div>
+            <div class="testi-name">Ahmed K.</div>
+            <div class="testi-role">Computer science student</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="quote-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Super patient teacher! I'm not technical at all but now I can run my own data analyses in Pandas. The real-world examples made everything click. Highly recommend.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#F0FDF4;">👩‍💼</div>
+          <div>
+            <div class="testi-name">Priya R.</div>
+            <div class="testi-role">Business intelligence manager</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-label"># pricing</div>
+    <h2 class="section-title">Simple, honest pricing</h2>
+    <p class="section-sub">No hidden fees. Cancel or pause anytime. First trial session is free.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount">$25 <span>/ hour</span></div>
+        <div class="price-desc">Perfect for one-off help, homework, or a specific topic.</div>
+        <ul class="price-features">
+          <li>Single session</li>
+          <li>Screen sharing + live coding</li>
+          <li>Session notes sent after</li>
+          <li>Unlimited questions via chat (24h)</li>
+        </ul>
+        <a href="#contact" class="btn-price outline">Book a session</a>
+      </div>
+      <div class="price-card popular">
+        <div class="popular-badge">⭐ Most popular</div>
+        <div class="price-tier">Weekly plan</div>
+        <div class="price-amount">$20 <span>/ hour</span></div>
+        <div class="price-desc">4 sessions/month — best for steady, structured learning.</div>
+        <ul class="price-features">
+          <li>4 × 1-hour sessions / month</li>
+          <li>Custom lesson plan for you</li>
+          <li>Progress tracking</li>
+          <li>Exercise sheets & projects</li>
+          <li>Slack/WhatsApp support</li>
+        </ul>
+        <a href="#contact" class="btn-price">Get started</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Intensive</div>
+        <div class="price-amount">$18 <span>/ hour</span></div>
+        <div class="price-desc">8 sessions/month — for career switchers or exam prep.</div>
+        <ul class="price-features">
+          <li>8 × 1-hour sessions / month</li>
+          <li>Full curriculum plan</li>
+          <li>Portfolio project included</li>
+          <li>Mock interview / exam prep</li>
+          <li>Priority scheduling</li>
+          <li>Unlimited async support</li>
+        </ul>
+        <a href="#contact" class="btn-price">Let's go deep</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="contact-bg">
+  <div class="section-inner">
+    <div class="section-label"># get_in_touch</div>
+    <h2 class="section-title">Book your free trial</h2>
+    <p class="section-sub">A 30-minute no-obligation session so we can meet, discuss your goals, and see if we're a good fit.</p>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h3>Let's talk Python 🐍</h3>
+        <p>Drop me a message and I'll get back to you within 24 hours. No spam, no pressure — just a friendly chat about your learning goals.</p>
+        <div class="contact-detail">
+          <div class="contact-icon">📧</div>
+          <span>hello@pytutor.dev</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">🕐</div>
+          <span>Mon–Sat, 9am–8pm (flexible timezone)</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <span>Online — Zoom / Google Meet</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">💼</div>
+          <span>Also available on Upwork</span>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-two">
+            <div class="form-row">
+              <label for="fname">Your name</label>
+              <input type="text" id="fname" placeholder="e.g. Sara" required/>
+            </div>
+            <div class="form-row">
+              <label for="email">Email address</label>
+              <input type="email" id="email" placeholder="sara@email.com" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="goal">What's your main goal?</label>
+            <select id="goal">
+              <option value="">Select a goal...</option>
+              <option>Learn Python from scratch</option>
+              <option>Data analysis with Pandas</option>
+              <option>Machine learning basics</option>
+              <option>University course / exam help</option>
+              <option>Career switch to data science</option>
+              <option>Kaggle / competition prep</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="message">Tell me a bit more</label>
+            <textarea id="message" placeholder="Your current level, what you want to achieve, any specific topics..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send message 🚀</button>
+        </form>
+        <div class="form-success" id="form-success">
+          🎉 Message sent! I'll reply within 24 hours. Looking forward to meeting you!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">&lt;PyTutor /&gt;</div>
+  <p>Python & Data Science Tutor · Online worldwide</p>
+  <p style="margin-top:4px;font-size:12px;">© 2026 · Built with ❤️ and a lot of Python</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#lessons">Lessons</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
